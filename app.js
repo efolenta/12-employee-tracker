@@ -1,7 +1,9 @@
+// This app requires the following node applications for this to work.
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
 
+// Database connection
 var connection = mysql.createConnection({
   host: "localhost",
 
@@ -70,6 +72,7 @@ function start() {
     else if (answer.home === "Remove Role") {
       removeRole();
     }
+    // If "Exit" is chosen, the application will close.
     else {
       console.log("Thank you for using the Employee Manager. Goodbye!");
       connection.end();
@@ -80,7 +83,11 @@ function start() {
 function viewEmployees() {
   connection.query("SELECT * FROM employee", function(error, results) {
     if (error) throw error;
+
+    // This shows the results in a nice table in the CLI
     console.table(results);
+
+    // Goes back to the main menu.
     start();
   })
 }
