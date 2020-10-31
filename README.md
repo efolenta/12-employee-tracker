@@ -4,8 +4,8 @@ The Employee Management Tracker is a command-line application that allows an adm
 
 Functionality includes:
 
-  * Add departments, roles, employees
-  * View departments, roles, employees
+  * Add departments DONE, roles, employees
+  * View departments, roles, employees DONE
   * Update employee roles
   * Remove employees
 
