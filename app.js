@@ -63,15 +63,6 @@ function start() {
     else if (answer.home === "Add Role") {
       addRole();
     }
-    else if (answer.home === "Remove Employee") {
-      removeEmployee();
-    }
-    else if (answer.home === "Remove Department") {
-      removeDepartment();
-    }
-    else if (answer.home === "Remove Role") {
-      removeRole();
-    }
     // If "Exit" is chosen, the application will close.
     else {
       console.log("Thank you for using the Employee Manager. Goodbye!");
