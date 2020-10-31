@@ -159,7 +159,7 @@ function addRole() {
     );
   });
 }
-
+// This function is used to add new employees for a specific department and role in the database.
 function addEmployee(){
   inquirer.prompt([{
     type: "input",
@@ -170,7 +170,7 @@ function addEmployee(){
           return console.log("Please enter a first name");
       }
       return true;
-  }
+    }
   },
   {
     type: "input",
@@ -181,20 +181,20 @@ function addEmployee(){
           return console.log("Please enter a last name.");
       }
       return true;
-  }
+    }
   },
   {
     type: "input",
     message: "Enter Employee ID",
     name: "employeeid",
     default: '1',
-  validate: function (answer) {
+    validate: function (answer) {
       if (answer.length < 1) {
           return console.log("Please enter a valid ID.");
       }
       return true;
-  }
-},
+    }
+  },
 ])
 .then(function(res){
   connection.query("INSERT INTO employee SET ?",{
@@ -213,3 +213,4 @@ function addEmployee(){
   start();
   });
 }
+
