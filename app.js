@@ -82,7 +82,44 @@ function viewEmployees() {
     start();
   })
 }
-
+const addRoleQuestions = [
+  {
+    type: "input",
+    name: "title",
+    message: "What is the title of the role?",
+    validate: function(value) {
+      if (value === null) {
+        return "Please enter a valid title";
+      } else {
+        return true;
+      }
+    }
+  },
+  {
+    type: "input",
+    name: "salary",
+    message: "What is the salary of the role?",
+    validate: function(value) {
+      if (isNaN(value)) {
+        return "Please enter a valid number"
+      } else {
+        return true;
+      };
+    }
+  },
+  {
+    type: "input",
+    name: "departmentId",
+    message: "What is the ID of the department for this role?",
+    validate: function(value) {
+      if (isNaN(value)) {
+        return "Please enter a valid number"
+      } else {
+        return true;
+      };
+    }
+  }
+];
 // This function is used to view all departments in the database.
 function viewDepartments() {
   connection.query("SELECT * FROM department", function(error, results) {
@@ -128,28 +165,19 @@ function addDepartment() {
 
 // This function is used to create new roles for a specific department in the database. First you choose a department then you add a new role.
 function addRole() {
-  inquirer.prompt([
-    {
-      name: "department",
-      type: "list",
-      message: "Choose a department."
-    }
-  ])
-  .then(function(answer) {
-    connection.query(
-      "INSERT INTO department SET ?",
-      {
-        name: answer.departmentName
-      },
-      function(err) {
-        if (err) throw err;
-        console.log("New department created!");
-        // re-prompt the user for if they want to bid or post
-        start();
-      }
-    );
-  });
+  inquirer.prompt(addRoleQuestions).then(function(answers) {
+  let query = "INSERT INTO role SET ";
+  query += `title = "${answers.title}", `;
+  query += `salary = ${answers.salary}, `;
+  query += `department_id = ${answers.departmentId}`
+    connection.query(query, function(err, result) {
+      if (err) throw err;
+      console.log("Role has been added!");
+      start();
+    });
+  })
 }
+
 // This function is used to add new employees for a specific department and role in the database.
 function addEmployee(){
   inquirer.prompt([{
